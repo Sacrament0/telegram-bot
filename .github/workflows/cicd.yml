@@ -36,4 +36,4 @@ jobs:
           context: .
           file: ./Dockerfile
           push: true
-          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/bot-image:latest
+          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/bot-image:latest,bot-image:1.0.0
