@@ -89,3 +89,5 @@ func initDB(cfg *config.Config) (*bolt.DB, error) {
 
 	return db, nil
 }
+
+// Create check
