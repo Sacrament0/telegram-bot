@@ -76,7 +76,7 @@ func (s *AuthorizationServer) ServeHTTP(w http.ResponseWriter, r *http.Request) 
 
 	log.Printf("chat_id: %d\nrequest_token: %s\naccess_token: %s\n", chatID, requestToken, authResp.AccessToken)
 
-	// перенаправляем пользователя
+	// перенаправляем пользователя.
 	w.Header().Add("Location", s.redirectURL)
 	w.WriteHeader(http.StatusMovedPermanently)
 }
