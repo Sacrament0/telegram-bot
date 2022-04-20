@@ -44,7 +44,7 @@ jobs:
     needs: build_and_push
 
     steps:
-      # подключаемся к серверу через ssh
+      # подключаемся к серверу через ssh.
       - name: Deploy to server via SSH
         uses: appleboy/ssh-action@master
         with:
