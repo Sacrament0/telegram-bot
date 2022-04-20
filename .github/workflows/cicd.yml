@@ -38,11 +38,11 @@ jobs:
           push: true
           tags: ${{ secrets.DOCKER_HUB_USERNAME }}/bot-image:latest
 
-deploy:
-  runs-on: ubuntu-latest
+  deploy:
+    runs-on: ubuntu-latest
       # указываем что для выполнения этого этапа, нужно выполнить предыдущий
     needs: build_and_push
-
+    
     steps:
       # подключаемся к серверу через ssh
       - name: Deploy to server via SSH
