@@ -1,8 +1,6 @@
 package config
 
 import (
-	"os"
-
 	"github.com/spf13/viper"
 )
 
@@ -69,9 +67,7 @@ func Init() (*Config, error) {
 
 // Парсит переменные окружения
 func parseEnv(cfg *Config) error {
-	os.Setenv("TOKEN", "5141221734:AAHSxTYUHYNfbXascUBKn9pTi4v0WvToSxU")
-	os.Setenv("CONSUMER_KEY", "101425-5b0a22249f035a3b41b52d0")
-	os.Setenv("AUTH_SERVER_URL", "http://localhost/")
+	
 
 	if err := viper.BindEnv("token"); err != nil {
 		return err
