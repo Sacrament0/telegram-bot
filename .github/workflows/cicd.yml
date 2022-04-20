@@ -38,34 +38,34 @@ jobs:
           push: true
           tags: ${{ secrets.DOCKER_HUB_USERNAME }}/bot-image:latest
 
-  deploy:
-    runs-on: ubuntu-latest
+deploy:
+  runs-on: ubuntu-latest
       # указываем что для выполнения этого этапа, нужно выполнить предыдущий
-      needs: build_and_push
+    needs: build_and_push
 
-      steps:
+    steps:
       # подключаемся к серверу через ssh
-        - name: Deploy to server via SSH
-          uses: appleboy/ssh-action@master
-          with:
-            host: ${{ secrets.HOST }}
-            username: ${{ secrets.USERNAME }}
-            password: ${{ secrets.PASSWORD }}
-            envs: IMAGE_NAME,CONTAINER_NAME
-            script: |
-              # Скачиваем образ с докерхаба
-              docker pull sacrament0/$(echo $IMAGE_NAME)
-              # Останавливаем докер контейнер
-              docker stop $(echo $CONTAINER_NAME)
-              # Удалем этот контейнер (старый контейнер)
-              docker rm $(echo $CONTAINER_NAME)
-              # Задаем переменные окружения
-              export TOKEN=${{ secrets.TELEGRAM_TOKEN }}
-              export CONSUMER_KEY=${{ secrets.POCKET_CONSUMER_KEY }}
-              export AUTH_SERVER_URL=${{ secrets.AUTH_SERVER_URL }}
-              # Запускаем новый контейнер из нового изображения
-              docker run -e TOKEN -e CONSUMER_KEY -e AUTH_SERVER_URL -d \
-              --restart always \
-              --publish 80:80 \
-              --name $(echo $CONTAINER_NAME) \
-              $(echo $IMAGE_NAME)
+      - name: Deploy to server via SSH
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          password: ${{ secrets.PASSWORD }}
+          envs: IMAGE_NAME,CONTAINER_NAME
+          script: |
+            # Скачиваем образ с докерхаба
+            docker pull sacrament0/$(echo $IMAGE_NAME)
+            # Останавливаем докер контейнер
+            docker stop $(echo $CONTAINER_NAME)
+            # Удалем этот контейнер (старый контейнер)
+            docker rm $(echo $CONTAINER_NAME)
+            # Задаем переменные окружения
+            export TOKEN=${{ secrets.TELEGRAM_TOKEN }}
+            export CONSUMER_KEY=${{ secrets.POCKET_CONSUMER_KEY }}
+            export AUTH_SERVER_URL=${{ secrets.AUTH_SERVER_URL }}
+            # Запускаем новый контейнер из нового изображения
+            docker run -e TOKEN -e CONSUMER_KEY -e AUTH_SERVER_URL -d \
+            --restart always \
+            --publish 80:80 \
+            --name $(echo $CONTAINER_NAME) \
+            $(echo $IMAGE_NAME)
