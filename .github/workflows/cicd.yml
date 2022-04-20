@@ -42,7 +42,7 @@ jobs:
     runs-on: ubuntu-latest
       # указываем что для выполнения этого этапа, нужно выполнить предыдущий
     needs: build_and_push
-    
+
     steps:
       # подключаемся к серверу через ssh
       - name: Deploy to server via SSH
@@ -68,4 +68,4 @@ jobs:
             --restart always \
             --publish 80:80 \
             --name $(echo $CONTAINER_NAME) \
-            $(echo $IMAGE_NAME)
+            sacrament0/$(echo $IMAGE_NAME)
