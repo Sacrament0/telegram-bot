@@ -67,7 +67,6 @@ func Init() (*Config, error) {
 
 // Парсит переменные окружения
 func parseEnv(cfg *Config) error {
-	
 
 	if err := viper.BindEnv("token"); err != nil {
 		return err
@@ -83,8 +82,7 @@ func parseEnv(cfg *Config) error {
 
 	cfg.TelegramToken = viper.GetString("token")
 	cfg.PocketConsumerKey = viper.GetString("consumer_key")
-	cfg.TelegramBotURL = viper.GetString("auth_server_url")
+	cfg.AuthServerURL = viper.GetString("auth_server_url")
 
 	return nil
 }
-
