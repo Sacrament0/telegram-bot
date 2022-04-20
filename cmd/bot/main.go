@@ -47,7 +47,7 @@ func main() {
 	telegramBot := telegram.NewBot(bot, pocketClient, tokenRepository, cfg.AuthServerURL, cfg.Messages)
 
 	// Запуск сервера для обработки редиректов от pocket
-	authorizationServer := server.NewAuthorizationServer(pocketClient, tokenRepository, cfg.AuthServerURL)
+	authorizationServer := server.NewAuthorizationServer(pocketClient, tokenRepository, cfg.TelegramBotURL)
 
 	// Запускаем бота
 	go func() {
@@ -89,4 +89,3 @@ func initDB(cfg *config.Config) (*bolt.DB, error) {
 
 	return db, nil
 }
-
